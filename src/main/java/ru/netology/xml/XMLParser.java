@@ -16,8 +16,6 @@ public class XMLParser {
 
     public static List<Employee> parceXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
 
-        //List<Employee> listXML = new ArrayList<>();
-
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse(new File(fileName));
@@ -33,7 +31,6 @@ public class XMLParser {
         return listXML;
     }
 
-    // создаем из узла документа объект Language
     private static Employee getEmployee(Node node) {
 
         Employee empl = new Employee();

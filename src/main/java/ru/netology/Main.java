@@ -7,10 +7,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 
-import static ru.netology.csv.CSVParser.*;
-import static ru.netology.json.JsonFileWriter.*;
-import static ru.netology.json.JsonParser.*;
-import static ru.netology.xml.XMLParser.*;
+import static ru.netology.csv.CSVParser.parceCSV;
+import static ru.netology.json.JsonFileWriter.listToJson;
+import static ru.netology.json.JsonFileWriter.writeString;
+import static ru.netology.json.JsonParser.jsonToList;
+import static ru.netology.json.JsonParser.readString;
+import static ru.netology.xml.XMLParser.parceXML;
 
 
 public class Main {
@@ -21,7 +23,7 @@ public class Main {
         String fileName = "data.csv";
 
         List<Employee> listCsv = parceCSV(columnMapping, fileName);
-        List<Employee> listXml  = parceXML("data.xml");
+        List<Employee> listXml = parceXML("data.xml");
 
         try {
 
