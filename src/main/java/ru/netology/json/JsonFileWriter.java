@@ -14,7 +14,7 @@ public class JsonFileWriter {
 
     public static String listToJson(List<Employee> list) {
 
-        StringBuilder sb = new StringBuilder();
+
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 

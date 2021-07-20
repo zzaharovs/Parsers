@@ -23,11 +23,10 @@ public class JsonParser {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
-            while ((json = br.readLine()) != null) {
-
+            if ((json = br.readLine()) != null) {
                 return json;
-
             }
+
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

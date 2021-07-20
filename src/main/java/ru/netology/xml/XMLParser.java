@@ -23,7 +23,7 @@ public class XMLParser {
 
         NodeList nodeList = doc.getElementsByTagName("employee");
 
-        List <Employee> listXML = new ArrayList<>();
+        List<Employee> listXML = new ArrayList<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
             listXML.add(getEmployee(nodeList.item(i)));
         }
@@ -33,24 +33,40 @@ public class XMLParser {
 
     private static Employee getEmployee(Node node) {
 
-        Employee empl = new Employee();
-        if (node.getNodeType() == Node.ELEMENT_NODE) {
+        Element element = (Element) node;
+        NodeList nodeList = node.getChildNodes();
 
-            Element element = (Element) node;
-            empl.setId(Long.valueOf(getTagValue("id", element)));
-            empl.setFirstName(getTagValue("firstName", element));
-            empl.setLastName(getTagValue("lastName", element));
-            empl.setCountry(getTagValue("country", element));
-            empl.setAge(Integer.parseInt(getTagValue("age", element)));
+        String[] fieldsEmployee = new String[nodeList.getLength()];
+        String[] valuesEmployee = new String[fieldsEmployee.length];
+
+        int size = 0;
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node_ = nodeList.item(i);
+            if (Node.ELEMENT_NODE == node_.getNodeType()) {
+                fieldsEmployee[size] = node_.getNodeName();
+                size++;
+            }
+        }
+
+        for (int i = 0; i < size
+                ; i++) {
+
+            NodeList valuesList = element.getElementsByTagName(fieldsEmployee[i])
+                    .item(0)
+                    .getChildNodes();
+
+            valuesEmployee[i] = valuesList.item(0).getNodeValue();
 
         }
-        return empl;
-    }
 
-    private static String getTagValue(String tag, Element element) {
-        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
-        Node node = (Node) nodeList.item(0);
-        return node.getNodeValue();
+        return new Employee(
+                Long.parseLong(valuesEmployee[0]),
+                valuesEmployee[1],
+                valuesEmployee[2],
+                valuesEmployee[3],
+                Integer.parseInt(valuesEmployee[4])
+        );
     }
 
 }
